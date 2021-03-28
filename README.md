@@ -1,2 +1,2 @@
 # pomodorro-app
-A simple productivity Pomodorro app made entirely using ReactJS
+A simple productivity Pomodoro app made entirely using ReactJS
