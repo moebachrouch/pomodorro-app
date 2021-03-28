@@ -532,10 +532,10 @@ class Timer extends Component {
               <div>
                 <label>Long break after: </label>
                 <select  onChange={this.updateWorkCycles}>
-                  <option value="1">1 pomodoro</option>
-                  <option value="2">2 pomodoros</option>
-                  <option value="3">3 pomodoros</option>
                   <option value="4">4 pomodoros</option>
+                  <option value="3">3 pomodoros</option>
+                  <option value="1">2 pomodoros</option>
+                  <option value="1">1 pomodoro</option>
                 </select>
               </div>
             </div>
