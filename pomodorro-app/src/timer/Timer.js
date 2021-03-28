@@ -46,18 +46,21 @@ class Timer extends Component {
   updateWorkMinutes(min) {
     this.setState({
       workMinutes: min.target.value,
+      workSeconds: 0
     });
   }
 
   updateBreakMinutes(min) {
     this.setState({
       breakMinutes: min.target.value,
+      breakSeconds: 0
     });
   }
 
   updateLongBreakMinutes(min) {
     this.setState({
       longBreakMinutes: min.target.value,
+      longBreakSeconds: 0
     });
   }
 
