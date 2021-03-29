@@ -7,7 +7,6 @@ const BREAK_TIME = 5;
 const LONG_BREAK_TIME = 25;
 
 let TEMP_WORK_CYCLES = WORK_CYCLES;
-
 let TEMP_WORK_TIME = WORK_TIME;
 let TEMP_BREAK_TIME = BREAK_TIME;
 let TEMP_LONG_BREAK_TIME = LONG_BREAK_TIME;
@@ -52,7 +51,7 @@ class Timer extends Component {
     TEMP_WORK_TIME = min.target.value;
     this.setState({
       workMinutes: TEMP_WORK_TIME,
-      workSeconds: 0
+      workSeconds: 0,
     });
   }
 
@@ -60,7 +59,7 @@ class Timer extends Component {
     TEMP_BREAK_TIME = min.target.value;
     this.setState({
       breakMinutes: TEMP_BREAK_TIME,
-      breakSeconds: 0
+      breakSeconds: 0,
     });
   }
 
@@ -68,13 +67,14 @@ class Timer extends Component {
     TEMP_LONG_BREAK_TIME = min.target.value;
     this.setState({
       longBreakMinutes: TEMP_LONG_BREAK_TIME,
-      longBreakSeconds: 0
+      longBreakSeconds: 0,
     });
   }
 
   updateWorkCycles(cycles) {
+    TEMP_WORK_CYCLES = cycles.target.value;
     this.setState({
-      workCycles: cycles.target.value,
+      workCycles: TEMP_WORK_CYCLES,
     });
   }
 
@@ -85,6 +85,8 @@ class Timer extends Component {
   resetTimer() {
     this.setState({
       isPaused: true,
+
+      workCycles: TEMP_WORK_CYCLES,
 
       workSeconds: 0,
       workMinutes: TEMP_WORK_TIME,
@@ -100,6 +102,11 @@ class Timer extends Component {
   }
 
   resetApp() {
+    TEMP_WORK_CYCLES = WORK_CYCLES;
+    TEMP_WORK_TIME = WORK_TIME;
+    TEMP_BREAK_TIME = BREAK_TIME;
+    TEMP_LONG_BREAK_TIME = LONG_BREAK_TIME;
+    
     this.setState({
       workCycles: WORK_CYCLES,
 
@@ -387,11 +394,9 @@ class Timer extends Component {
     if (!this.state.isLongBreakTime && this.state.isWorkTime) {
       minutesToDisplay = this.adjustDigitsFormat(this.state.workMinutes);
       secondsToDisplay = this.adjustDigitsFormat(this.state.workSeconds);
-
     } else if (!this.state.isLongBreakTime && !this.state.isWorkTime) {
       minutesToDisplay = this.adjustDigitsFormat(this.state.breakMinutes);
       secondsToDisplay = this.adjustDigitsFormat(this.state.breakSeconds);
-    
     } else {
       minutesToDisplay = this.adjustDigitsFormat(this.state.longBreakMinutes);
       secondsToDisplay = this.adjustDigitsFormat(this.state.longBreakSeconds);
@@ -491,7 +496,9 @@ class Timer extends Component {
 
         <div>
           {!this.state.isLongBreakTime ? (
-            <h1>{this.state.workCycles} pomodoros left</h1>
+            <h1>
+              {this.state.workCycles} / {TEMP_WORK_CYCLES}
+            </h1>
           ) : (
             <h1>Pomodoro Complete!</h1>
           )}
@@ -507,8 +514,10 @@ class Timer extends Component {
               <div>
                 <form>
                   <label>Work interval duration: </label>
-                  <select disabled={isNotPaused}
-                  onChange={this.updateWorkMinutes} >
+                  <select
+                    disabled={isNotPaused}
+                    onChange={this.updateWorkMinutes}
+                  >
                     <option value="25">25 minutes</option>
                     <option value="30">30 minutes</option>
                     <option value="35">35 minutes</option>
@@ -525,9 +534,10 @@ class Timer extends Component {
               <div>
                 <form>
                   <label>Short break duration: </label>
-                  <select 
-                  onChange={this.updateBreakMinutes}
-                  disabled={isNotPaused}>
+                  <select
+                    onChange={this.updateBreakMinutes}
+                    disabled={isNotPaused}
+                  >
                     <option value="5">5 minutes</option>
                     <option value="10">10 minutes</option>
                     <option value="15">15 minutes</option>
@@ -537,9 +547,10 @@ class Timer extends Component {
 
               <div>
                 <label>Long break duration: </label>
-                <select 
-                onChange={this.updateLongBreakMinutes}
-                disabled={isNotPaused}>
+                <select
+                  onChange={this.updateLongBreakMinutes}
+                  disabled={isNotPaused}
+                >
                   <option value="15">15 minutes</option>
                   <option value="20">20 minutes</option>
                   <option value="25">25 minutes</option>
@@ -549,9 +560,7 @@ class Timer extends Component {
 
               <div>
                 <label>Long break after: </label>
-                <select 
-                onChange={this.updateWorkCycles}
-                disabled={isNotPaused}>
+                <select onChange={this.updateWorkCycles} disabled={isNotPaused}>
                   <option value="4">4 pomodoros</option>
                   <option value="3">3 pomodoros</option>
                   <option value="1">2 pomodoros</option>
