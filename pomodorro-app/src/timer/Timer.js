@@ -500,7 +500,7 @@ class Timer extends Component {
               {this.state.workCycles} / {TEMP_WORK_CYCLES}
             </h1>
           ) : (
-            <h1>Pomodoro Complete!</h1>
+            <h1>Time for a long break!</h1>
           )}
         </div>
 
@@ -518,7 +518,7 @@ class Timer extends Component {
                     disabled={isNotPaused}
                     onChange={this.updateWorkMinutes}
                   >
-                    <option selected="selected" value="25">25 minutes</option>
+                    <option defaultValue="selected" value="25">25 minutes</option>
                     <option value="30">30 minutes</option>
                     <option value="35">35 minutes</option>
                     <option value="40">40 minutes</option>
@@ -538,7 +538,7 @@ class Timer extends Component {
                     onChange={this.updateBreakMinutes}
                     disabled={isNotPaused}
                   >
-                    <option selected="selected" value="5">5 minutes</option>
+                    <option defaultValue="selected" value="5">5 minutes</option>
                     <option value="10">10 minutes</option>
                     <option value="15">15 minutes</option>
                   </select>
@@ -551,7 +551,7 @@ class Timer extends Component {
                   onChange={this.updateLongBreakMinutes}
                   disabled={isNotPaused}
                 >
-                  <option selected="selected" value="15">15 minutes</option>
+                  <option defaultValue="selected" value="15">15 minutes</option>
                   <option value="20">20 minutes</option>
                   <option value="25">25 minutes</option>
                   <option value="30">30 minutes</option>
@@ -561,7 +561,7 @@ class Timer extends Component {
               <div>
                 <label>Long break after: </label>
                 <select onChange={this.updateWorkCycles} disabled={isNotPaused}>
-                  <option selected="selected" value="4">4 pomodoros</option>
+                  <option defaultValue="selected" value="4">4 pomodoros</option>
                   <option value="3">3 pomodoros</option>
                   <option value="1">2 pomodoros</option>
                   <option value="1">1 pomodoro</option>
